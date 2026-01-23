@@ -20,6 +20,7 @@
 - [Citation](#citation)
 
 ## News
+* **[2026.01.16]** Our conference paper **DoctorAgent-RL: A Multi-Agent Collaborative Reinforcement Learning System for Multi-Turn Clinical Dialogue** ([preliminary version](https://github.com/JarvisUSTC/DoctorAgent-RL/blob/main/DoctorAgent-RL_ICASSP2026.pdf.zip)) has been accepted by **ICASSP 2026**! We have also submitted a significantly extended version of this work to a journal.
 * **[2025.10.15]** We've released a significant update to our paper, now available on [arXiv](https://arxiv.org/pdf/2505.19630)! This new version includes more practical and rigorous experiments, showcasing the real-world capabilities of our DoctorAgent-RL model. We've conducted a thorough evaluation of the model on real patient diagnoses and validated its performance with expert feedback.
 * **[2025.6.16]** We released the source code in [GitHub](https://github.com/JarvisUSTC/DoctorAgent-RL) and Models in [Huggingface](https://huggingface.co/collections/Jarvis1111/doctoragent-rl-684ffbcade52305ba0e3e97f)!
 * **[2025.5.26]** We released our [paper](https://arxiv.org/pdf/2505.19630) in arXiv!
