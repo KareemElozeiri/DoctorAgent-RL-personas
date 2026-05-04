@@ -1,0 +1,294 @@
+W0420 18:08:02.231360 138508358092608 torch/distributed/run.py:779] 
+W0420 18:08:02.231360 138508358092608 torch/distributed/run.py:779] *****************************************
+W0420 18:08:02.231360 138508358092608 torch/distributed/run.py:779] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0420 18:08:02.231360 138508358092608 torch/distributed/run.py:779] *****************************************
+Starting Medical Dialogue Simulation with DeepSeek-v3 API (Doctor) and Local Model (Patient)
+Doctor model: Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking
+Patient model path: Qwen2.5-7B-Instruct
+Input file: data/MTMedDialog_test.json
+Temperature: 0.7, Top-p: 0.9
+Maximum iterations: 10
+Patient model batch size: 32
+Output will be saved to: outputs/Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking/test_en_output_multi_gpu_patientllm_iter_10.json
+Initializing models and API client...
+Starting Medical Dialogue Simulation with DeepSeek-v3 API (Doctor) and Local Model (Patient)
+Doctor model: Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking
+Patient model path: Qwen2.5-7B-Instruct
+Input file: data/MTMedDialog_test.json
+Temperature: 0.7, Top-p: 0.9
+Maximum iterations: 10
+Patient model batch size: 32
+Output will be saved to: outputs/Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking/test_en_output_multi_gpu_patientllm_iter_10.json
+Initializing models and API client...
+Starting Medical Dialogue Simulation with DeepSeek-v3 API (Doctor) and Local Model (Patient)
+Doctor model: Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking
+Patient model path: Qwen2.5-7B-Instruct
+Input file: data/MTMedDialog_test.json
+Temperature: 0.7, Top-p: 0.9
+Maximum iterations: 10
+Patient model batch size: 32
+Output will be saved to: outputs/Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking/test_en_output_multi_gpu_patientllm_iter_10.json
+Initializing models and API client...
+Starting Medical Dialogue Simulation with DeepSeek-v3 API (Doctor) and Local Model (Patient)
+Doctor model: Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking
+Patient model path: Qwen2.5-7B-Instruct
+Input file: data/MTMedDialog_test.json
+Temperature: 0.7, Top-p: 0.9
+Maximum iterations: 10
+Patient model batch size: 32
+Output will be saved to: outputs/Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking/test_en_output_multi_gpu_patientllm_iter_10.json
+Initializing models and API client...
+Starting Medical Dialogue Simulation with DeepSeek-v3 API (Doctor) and Local Model (Patient)
+Doctor model: Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking
+Patient model path: Qwen2.5-7B-Instruct
+Input file: data/MTMedDialog_test.json
+Temperature: 0.7, Top-p: 0.9
+Maximum iterations: 10
+Patient model batch size: 32
+Output will be saved to: outputs/Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking/test_en_output_multi_gpu_patientllm_iter_10.json
+Initializing models and API client...
+Starting Medical Dialogue Simulation with DeepSeek-v3 API (Doctor) and Local Model (Patient)
+Doctor model: Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking
+Patient model path: Qwen2.5-7B-Instruct
+Input file: data/MTMedDialog_test.json
+Temperature: 0.7, Top-p: 0.9
+Maximum iterations: 10
+Patient model batch size: 32
+Output will be saved to: outputs/Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking/test_en_output_multi_gpu_patientllm_iter_10.json
+Initializing models and API client...
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1062, in <module>
+[rank2]:     main()
+[rank2]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1007, in main
+[rank2]:     simulator = MedicalDialogueSimulation(
+[rank2]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 90, in __init__
+[rank2]:     is_distributed = setup_distributed()
+[rank2]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 62, in setup_distributed
+[rank2]:     torch.cuda.set_device(global_local_rank)
+[rank2]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/cuda/__init__.py", line 420, in set_device
+[rank2]:     torch._C._cuda_setDevice(device)
+[rank2]: RuntimeError: CUDA error: invalid device ordinal
+[rank2]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank2]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank2]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Initialized process 0/8 on GPU 0
+Process 0: Using device: cuda:0
+Starting Medical Dialogue Simulation with DeepSeek-v3 API (Doctor) and Local Model (Patient)
+Doctor model: Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking
+Patient model path: Qwen2.5-7B-Instruct
+Input file: data/MTMedDialog_test.json
+Temperature: 0.7, Top-p: 0.9
+Maximum iterations: 10
+Patient model batch size: 32
+Output will be saved to: outputs/Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking/test_en_output_multi_gpu_patientllm_iter_10.json
+Initializing models and API client...
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1062, in <module>
+[rank5]:     main()
+[rank5]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1007, in main
+[rank5]:     simulator = MedicalDialogueSimulation(
+[rank5]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 90, in __init__
+[rank5]:     is_distributed = setup_distributed()
+[rank5]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 62, in setup_distributed
+[rank5]:     torch.cuda.set_device(global_local_rank)
+[rank5]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/cuda/__init__.py", line 420, in set_device
+[rank5]:     torch._C._cuda_setDevice(device)
+[rank5]: RuntimeError: CUDA error: invalid device ordinal
+[rank5]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank5]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank5]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Initialized API client for model: Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1062, in <module>
+[rank6]:     main()
+[rank6]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1007, in main
+[rank6]:     simulator = MedicalDialogueSimulation(
+[rank6]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 90, in __init__
+[rank6]:     is_distributed = setup_distributed()
+[rank6]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 62, in setup_distributed
+[rank6]:     torch.cuda.set_device(global_local_rank)
+[rank6]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/cuda/__init__.py", line 420, in set_device
+[rank6]:     torch._C._cuda_setDevice(device)
+[rank6]: RuntimeError: CUDA error: invalid device ordinal
+[rank6]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank6]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank6]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1062, in <module>
+[rank1]:     main()
+[rank1]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1007, in main
+[rank1]:     simulator = MedicalDialogueSimulation(
+[rank1]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 90, in __init__
+[rank1]:     is_distributed = setup_distributed()
+[rank1]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 62, in setup_distributed
+[rank1]:     torch.cuda.set_device(global_local_rank)
+[rank1]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/cuda/__init__.py", line 420, in set_device
+[rank1]:     torch._C._cuda_setDevice(device)
+[rank1]: RuntimeError: CUDA error: invalid device ordinal
+[rank1]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank1]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank1]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1062, in <module>
+[rank3]:     main()
+[rank3]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1007, in main
+[rank3]:     simulator = MedicalDialogueSimulation(
+[rank3]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 90, in __init__
+[rank3]:     is_distributed = setup_distributed()
+[rank3]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 62, in setup_distributed
+[rank3]:     torch.cuda.set_device(global_local_rank)
+[rank3]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/cuda/__init__.py", line 420, in set_device
+[rank3]:     torch._C._cuda_setDevice(device)
+[rank3]: RuntimeError: CUDA error: invalid device ordinal
+[rank3]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank3]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank3]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1062, in <module>
+[rank4]:     main()
+[rank4]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1007, in main
+[rank4]:     simulator = MedicalDialogueSimulation(
+[rank4]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 90, in __init__
+[rank4]:     is_distributed = setup_distributed()
+[rank4]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 62, in setup_distributed
+[rank4]:     torch.cuda.set_device(global_local_rank)
+[rank4]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/cuda/__init__.py", line 420, in set_device
+[rank4]:     torch._C._cuda_setDevice(device)
+[rank4]: RuntimeError: CUDA error: invalid device ordinal
+[rank4]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank4]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank4]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Starting Medical Dialogue Simulation with DeepSeek-v3 API (Doctor) and Local Model (Patient)
+Doctor model: Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking
+Patient model path: Qwen2.5-7B-Instruct
+Input file: data/MTMedDialog_test.json
+Temperature: 0.7, Top-p: 0.9
+Maximum iterations: 10
+Patient model batch size: 32
+Output will be saved to: outputs/Jarvis1111/DoctorAgent-RL-SFT-1k-Thinking/test_en_output_multi_gpu_patientllm_iter_10.json
+Initializing models and API client...
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/utils/_http.py", line 403, in hf_raise_for_status
+[rank0]:     response.raise_for_status()
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/requests/models.py", line 1026, in raise_for_status
+[rank0]:     raise HTTPError(http_error_msg, response=self)
+[rank0]: requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/Qwen2.5-7B-Instruct/resolve/main/tokenizer_config.json
+
+[rank0]: The above exception was the direct cause of the following exception:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/transformers/utils/hub.py", line 479, in cached_files
+[rank0]:     hf_hub_download(
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1014, in hf_hub_download
+[rank0]:     return _hf_hub_download_to_cache_dir(
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1121, in _hf_hub_download_to_cache_dir
+[rank0]:     _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1662, in _raise_on_head_call_error
+[rank0]:     raise head_call_error
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1550, in _get_metadata_or_catch_error
+[rank0]:     metadata = get_hf_file_metadata(
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1467, in get_hf_file_metadata
+[rank0]:     r = _request_wrapper(
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 283, in _request_wrapper
+[rank0]:     response = _request_wrapper(
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 307, in _request_wrapper
+[rank0]:     hf_raise_for_status(response)
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/huggingface_hub/utils/_http.py", line 453, in hf_raise_for_status
+[rank0]:     raise _format(RepositoryNotFoundError, message, response) from e
+[rank0]: huggingface_hub.errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-69e66b86-7e34163c2751ec5372a65b00;b7de7a4c-ff6a-4e8a-9c93-6116724d26ba)
+
+[rank0]: Repository Not Found for url: https://huggingface.co/Qwen2.5-7B-Instruct/resolve/main/tokenizer_config.json.
+[rank0]: Please make sure you specified the correct `repo_id` and `repo_type`.
+[rank0]: If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+[rank0]: Invalid username or password.
+
+[rank0]: The above exception was the direct cause of the following exception:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1062, in <module>
+[rank0]:     main()
+[rank0]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1007, in main
+[rank0]:     simulator = MedicalDialogueSimulation(
+[rank0]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 130, in __init__
+[rank0]:     self.patient_tokenizer = AutoTokenizer.from_pretrained(patient_model_path, trust_remote_code=True, padding_side='left')
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py", line 1089, in from_pretrained
+[rank0]:     tokenizer_config = get_tokenizer_config(pretrained_model_name_or_path, **kwargs)
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py", line 921, in get_tokenizer_config
+[rank0]:     resolved_config_file = cached_file(
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/transformers/utils/hub.py", line 322, in cached_file
+[rank0]:     file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+[rank0]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/transformers/utils/hub.py", line 511, in cached_files
+[rank0]:     raise OSError(
+[rank0]: OSError: Qwen2.5-7B-Instruct is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+[rank0]: If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1062, in <module>
+[rank7]:     main()
+[rank7]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 1007, in main
+[rank7]:     simulator = MedicalDialogueSimulation(
+[rank7]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 90, in __init__
+[rank7]:     is_distributed = setup_distributed()
+[rank7]:   File "/workspace/kareem/DoctorAgent-RL/ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py", line 62, in setup_distributed
+[rank7]:     torch.cuda.set_device(global_local_rank)
+[rank7]:   File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/cuda/__init__.py", line 420, in set_device
+[rank7]:     torch._C._cuda_setDevice(device)
+[rank7]: RuntimeError: CUDA error: invalid device ordinal
+[rank7]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank7]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank7]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank2]:[W420 18:08:07.622442323 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+[rank5]:[W420 18:08:07.673923569 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+[rank6]:[W420 18:08:07.699938361 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+[rank4]:[W420 18:08:07.702229971 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+[rank1]:[W420 18:08:07.751382161 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+[rank3]:[W420 18:08:07.754643662 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+[rank0]:[W420 18:08:07.832301929 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+[rank7]:[W420 18:08:07.856671525 ProcessGroupNCCL.cpp:1168] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+W0420 18:08:07.400484 138508358092608 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 41931 closing signal SIGTERM
+W0420 18:08:07.400811 138508358092608 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 41932 closing signal SIGTERM
+W0420 18:08:07.400871 138508358092608 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 41941 closing signal SIGTERM
+W0420 18:08:07.400940 138508358092608 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 41942 closing signal SIGTERM
+W0420 18:08:07.400984 138508358092608 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 41943 closing signal SIGTERM
+W0420 18:08:07.401027 138508358092608 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 41944 closing signal SIGTERM
+W0420 18:08:07.401070 138508358092608 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 41945 closing signal SIGTERM
+E0420 18:08:07.515778 138508358092608 torch/distributed/elastic/multiprocessing/api.py:833] failed (exitcode: 1) local_rank: 2 (pid: 41940) of binary: /root/miniconda3/envs/ragen/bin/python3.9
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/ragen/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+  File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 348, in wrapper
+    return f(*args, **kwargs)
+  File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/distributed/run.py", line 901, in main
+    run(args)
+  File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 133, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/root/miniconda3/envs/ragen/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 264, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+ragen/env/medical_consultation/evaluation/inference_fast_for_patientllm_with_api.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-04-20_18:08:07
+  host      : fda3389781c0
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 41940)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

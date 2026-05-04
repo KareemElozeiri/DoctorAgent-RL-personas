@@ -14,7 +14,7 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
 
 # Global variables for model initialization
-QWEN_MODEL_PATH = "Qwen2.5-7B-Instruct"
+QWEN_MODEL_PATH = "Qwen/Qwen2.5-7B-Instruct"
 global_model = None
 global_tokenizer = None
 global_model_loaded = False

@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: ragen
+Version: 0.1
+Author: RAGEN Team
+Author-email: zihanwang.ai@gmail.com
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: license-file

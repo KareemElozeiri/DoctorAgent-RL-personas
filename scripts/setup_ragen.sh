@@ -37,21 +37,21 @@ print_step() {
 
 # Main installation process
 main() {
-    # Check prerequisites
-    check_conda || exit 1
+    # # Check prerequisites
+    # check_conda || exit 1
     
-    # Create and activate conda environment
-    # if not exists, create it
-    if ! conda env list | grep -q "ragen"; then
-        print_step "Creating conda environment 'ragen' with Python 3.9..."
-        conda create -n ragen python=3.9 -y
-    else
-        print_step "Conda environment 'ragen' already exists"
-    fi
+    # # Create and activate conda environment
+    # # if not exists, create it
+    # if ! conda env list | grep -q "ragen"; then
+    #     print_step "Creating conda environment 'ragen' with Python 3.9..."
+    #     conda create -n ragen python=3.9 -y
+    # else
+    #     print_step "Conda environment 'ragen' already exists"
+    # fi
     
-    # Need to source conda for script environment
-    eval "$(conda shell.bash hook)"
-    conda activate ragen
+    # # Need to source conda for script environment
+    # eval "$(conda shell.bash hook)"
+    # conda activate ragen
     
     # Clone repository
     # print_step "Cloning ragen repository..."

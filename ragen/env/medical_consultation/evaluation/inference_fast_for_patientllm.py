@@ -17,6 +17,23 @@ global_rank = None
 global_world_size = None
 global_local_rank = None
 
+
+def load_patient_persona(persona_arg: str) -> str:
+    """Load a persona from a file path or use the raw string directly."""
+    if not persona_arg:
+        return ""
+
+    persona_arg = persona_arg.strip()
+    if not persona_arg:
+        return ""
+
+    if os.path.isfile(persona_arg):
+        with open(persona_arg, "r", encoding="utf-8") as f:
+            return f.read().strip()
+
+    return persona_arg
+
+
 def setup_distributed():
     """Setup distributed training environment"""
     global global_rank, global_world_size, global_local_rank
@@ -46,7 +63,9 @@ def setup_distributed():
     return True
 
 class MedicalDialogueSimulation:
-    def __init__(self, model_path, input_file, output_file, temperature=0.7, top_p=0.9, device_map="auto", batch_size=8):
+    def __init__(self, model_path, input_file, output_file, temperature=0.7, top_p=0.9,
+                 patient_model_path="Qwen/Qwen2.5-7B-Instruct", device_map="auto", batch_size=8,
+                 patient_persona=""):
         """
         初始化医患对话模拟系统
         Args:
@@ -55,14 +74,17 @@ class MedicalDialogueSimulation:
             output_file (str): 保存模拟结果的输出 JSON 文件路径.
             temperature (float): 医生模型生成时的温度参数.
             top_p (float): 医生模型生成时的 top-p 参数.
+            patient_model_path (str): 患者模型的路径.
             device_map (str): 模型加载的设备映射.
             batch_size (int): 批处理大小.
+            patient_persona (str): Optional patient persona text or file path content.
         """
         self.input_file = input_file
         self.output_file = output_file
         self.temperature = temperature
         self.top_p = top_p
         self.batch_size = batch_size # 存储批处理大小
+        self.patient_persona = load_patient_persona(patient_persona)
 
         # 设置分布式环境
         is_distributed = setup_distributed()
@@ -98,9 +120,7 @@ class MedicalDialogueSimulation:
                 trust_remote_code=True
             )
 
-        # 加载患者模型和分词器 (假设患者模型使用 Qwen2.5-7B-Instruct)
-        # 注意：如果患者模型路径不同，请修改这里
-        patient_model_path = "Qwen2.5-7B-Instruct"
+        # 加载患者模型和分词器
         # 设置 padding_side='left' for decoder-only models
         self.patient_tokenizer = AutoTokenizer.from_pretrained(patient_model_path, trust_remote_code=True, padding_side='left')
         # 确保 padding token 已设置，用于批处理
@@ -538,10 +558,19 @@ Doctor's Current Question: {question}
         Returns:
             str: A formatted prompt for the environment LLM
         """
+        persona_section = ""
+        if self.patient_persona:
+            persona_section = f"""
+Patient persona:
+{self.patient_persona}
+
+Follow this persona in your tone, wording, emotional style, and communication habits, but do not change or invent medical facts that conflict with the self-report states.
+"""
+
         system_prompt = f"""You are a patient interacting with a doctor. Instructions for Responding to Medical Questions:
 Answer each medical question from the doctor concisely in a single sentence, strictly describing your symptoms and avoiding any mention of diagnoses and recommendations.
 If the question is unrelated to your self-report states: "Sorry, I cannot answer your question."
-
+{persona_section}
 Your self-report states: {description}
 """
 
@@ -855,8 +884,10 @@ Your self-report states: {description}
 def main():
     # 设置命令行参数解析器
     parser = argparse.ArgumentParser(description="Medical Dialogue Simulation with Qwen 2.5 (Batched)")
-    parser.add_argument("--model_path", type=str, default="Qwen2.5-7B-Instruct",
+    parser.add_argument("--model_path", type=str, default="Qwen/Qwen2.5-7B-Instruct",
                         help="Path to the Qwen model")
+    parser.add_argument("--patient_model_path", type=str, default="Qwen/Qwen2.5-7B-Instruct",
+                        help="Path to the patient model")
     parser.add_argument("--input_file", type=str, default="ragen/env/medical_consultation/evaluation/test.json",
                         help="Input JSON file containing dialogue data")
     parser.add_argument("--output_dir", type=str,
@@ -882,6 +913,8 @@ def main():
                         help="Ending index for dialogue processing (None means process to the end)")
     parser.add_argument("--batch_size", type=int, default=8, # 添加批处理大小参数
                         help="Batch size for model inference")
+    parser.add_argument("--patient_persona", type=str, default="",
+                        help="Optional patient persona text or path to a persona file")
     parser.add_argument("--local_rank", type=int, default=-1,
                         help="Local rank for distributed training")
 
@@ -901,10 +934,13 @@ def main():
     if args.verbose:
         print(f"Starting Medical Dialogue Simulation with Qwen 2.5 (Batched)")
         print(f"Model path: {args.model_path}")
+        print(f"Patient model path: {args.patient_model_path}")
         print(f"Input file: {args.input_file}")
         print(f"Temperature: {args.temperature}, Top-p: {args.top_p}")
         print(f"Maximum iterations: {args.max_iterations}")
         print(f"Batch size: {args.batch_size}")
+        if args.patient_persona:
+            print(f"Patient persona: {args.patient_persona}")
         if args.start_idx > 0 or args.end_idx is not None:
             print(f"Processing dialogues from index {args.start_idx} to {args.end_idx if args.end_idx is not None else 'end'}")
 
@@ -936,12 +972,14 @@ def main():
     # 创建并运行模拟器
     simulator = MedicalDialogueSimulation(
         model_path=args.model_path,
+        patient_model_path=args.patient_model_path,
         input_file=args.input_file,
         output_file=output_file,
         temperature=args.temperature,
         top_p=args.top_p,
         device_map=args.device_map,
-        batch_size=args.batch_size # 传递批处理大小
+        batch_size=args.batch_size, # 传递批处理大小
+        patient_persona=args.patient_persona
     )
 
     results = simulator.run_simulation(
