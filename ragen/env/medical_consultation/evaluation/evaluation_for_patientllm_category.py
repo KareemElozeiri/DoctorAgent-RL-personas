@@ -506,6 +506,22 @@ class MedicalDiagnosisEvaluator:
 
         return dei
 
+    def calculate_early_termination_bonus(self, combined_score, total_turns, max_turns=10):
+        """
+        Calculate early termination bonus: reward for diagnosing before max_turns,
+        scaled by diagnostic quality.
+        early_termination_bonus = (turns_remaining / max_turns) * combined_score
+
+        Parameters:
+            combined_score (float): The combined diagnostic performance score
+            total_turns (int): Total interaction turns used
+            max_turns (int): Maximum allowed turns
+        """
+        turns_remaining = max(0, max_turns - total_turns)
+        if max_turns <= 0:
+            return 0.0
+        return (turns_remaining / max_turns) * combined_score
+
     def extract_model_outputs(self):
         """
         Extract model diagnosis and recommendation text from the simulation data.
@@ -743,6 +759,7 @@ def calculate_category_averages(results_by_category):
                 "model_score": np.mean([r["information_retrieval"]["model_score"] for r in results])
             },
             "diagnostic_efficiency_index": np.mean([r["diagnostic_efficiency_index"] for r in results]),
+            "early_termination_bonus": np.mean([r["early_termination_bonus"] for r in results]),
             "case_count": len(results)
         }
         
@@ -751,7 +768,7 @@ def calculate_category_averages(results_by_category):
     return category_averages
 
 
-def evaluate_all_cases(simulation_data_list, reference_data_list=None, alpha=1.0, beta=0.01, batch_size=16):
+def evaluate_all_cases(simulation_data_list, reference_data_list=None, alpha=1.0, beta=0.01, batch_size=16, max_turns=10):
     """
     Evaluate all simulation cases using batch processing for semantic similarity.
 
@@ -921,6 +938,13 @@ def evaluate_all_cases(simulation_data_list, reference_data_list=None, alpha=1.0
             avg_tokens=avg_tokens
         )
 
+        # Early termination bonus: rewards finishing early with a good diagnosis
+        etb = evaluator.calculate_early_termination_bonus(
+            combined_score=metrics["combined_score"],
+            total_turns=total_turns,
+            max_turns=max_turns
+        )
+
         # Add ID and category for identification
         result = {
             "id": sim_item.get("id"),
@@ -939,9 +963,10 @@ def evaluate_all_cases(simulation_data_list, reference_data_list=None, alpha=1.0
                 "precision": precision,
                 "model_score": info_gather_semantic_score
             },
-            "diagnostic_efficiency_index": dei
+            "diagnostic_efficiency_index": dei,
+            "early_termination_bonus": etb
         }
-        
+
         case_results.append(result)
         
         # Group results by category
@@ -998,7 +1023,8 @@ def evaluate_all_cases(simulation_data_list, reference_data_list=None, alpha=1.0
             "precision": np.mean([r["information_retrieval"]["precision"] for r in case_results]),
             "model_score": np.mean([r["information_retrieval"]["model_score"] for r in case_results])
         },
-        "diagnostic_efficiency_index": np.mean([r["diagnostic_efficiency_index"] for r in case_results])
+        "diagnostic_efficiency_index": np.mean([r["diagnostic_efficiency_index"] for r in case_results]),
+        "early_termination_bonus": np.mean([r["early_termination_bonus"] for r in case_results])
     }
 
     # Calculate category-based averages
@@ -1029,6 +1055,8 @@ def main():
                         help='Weight for average token count in DEI calculation')
     parser.add_argument('--batch_size', type=int, default=16,
                         help='Batch size for semantic similarity calculation')
+    parser.add_argument('--max_turns', type=int, default=10,
+                        help='Maximum dialogue turns used during inference (for early termination bonus)')
     parser.add_argument('--local_rank', type=int, default=-1,
                         help='Local rank for distributed training')
 
@@ -1057,7 +1085,8 @@ def main():
         reference_data_list=reference_data,
         alpha=args.alpha,
         beta=args.beta,
-        batch_size=args.batch_size # Pass batch size
+        batch_size=args.batch_size,
+        max_turns=args.max_turns
     )
 
     # Save results to output file
