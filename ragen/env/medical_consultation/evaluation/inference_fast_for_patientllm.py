@@ -96,7 +96,11 @@ class MedicalDialogueSimulation:
 
         # 加载医生模型和分词器
         # 设置 padding_side='left' for decoder-only models
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True, padding_side='left', use_fast=False)
+        # Fine-tuned models may not include tokenizer files; fall back to patient model tokenizer
+        try:
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True, padding_side='left')
+        except Exception:
+            self.tokenizer = AutoTokenizer.from_pretrained(patient_model_path, trust_remote_code=True, padding_side='left')
         # 确保 padding token 已设置，用于批处理
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
