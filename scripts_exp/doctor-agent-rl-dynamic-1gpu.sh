@@ -87,7 +87,6 @@ python -m ragen.trainer.main_ppo \
   env.env_llm.model.path=Qwen/Qwen2.5-7B-Instruct \
   env.env_llm.model.trust_remote_code=True \
   env.env_llm.model.use_liger=True \
-  env.env_llm.model.override_config.max_position_embeddings=4000 \
   env.env_llm.generation.prompt_length=2272 \
   env.env_llm.generation.response_length=256 \
   env.env_llm.generation.max_model_len=2528 \
