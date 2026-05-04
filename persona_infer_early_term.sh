@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-MODEL_PATH=${1:-"Jarvis1111/DoctorAgent-RL"}
+MODEL_PATH=${1:?"Usage: bash persona_infer_early_term.sh <path_to_retrained_model>"}
 PATIENT_MODEL_PATH=${2:-"Qwen/Qwen2.5-7B-Instruct"}
 PERSONA_DIR=${3:-"/workspace/kareem/patient_persona"}
 OUTPUT_ROOT="outputs/persona_experiments_etb"
