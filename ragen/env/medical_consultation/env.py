@@ -554,9 +554,10 @@ Doctor's question: {doctor_question}
                     gt_diagnosis = cls._shared_data[env.index]['target']['diagnosis']
                     
                     # 计算诊断的 similarity 分数
-                    similarity = env._get_rouge_score(diagnosis, gt_diagnosis)
+                    diag_similarity = env._get_rouge_score(diagnosis, gt_diagnosis)
+                    similarity = diag_similarity
                     reward += similarity * 5  # 诊断奖励
-                    
+
                     # 检查是否有建议
                     # suggestion_match = re.search(r"<recommendation>(.*?)</recommendation>", action)
                     suggestion_match = re.search(r"Recommendation[:：](.*?)(?=\n|$)", action, re.DOTALL)
@@ -566,7 +567,13 @@ Doctor's question: {doctor_question}
                         if len(gt_suggestion) > 0:
                             similarity = env._get_rouge_score(suggestion, gt_suggestion)
                             reward += similarity * 5  # 建议奖励
-                    
+
+                    # Early termination bonus: reward diagnosing before max turns, scaled by diagnosis quality
+                    turns_remaining = env.max_turns - env.current_turn
+                    if turns_remaining > 0:
+                        early_bonus = (turns_remaining / env.max_turns) * diag_similarity * 5
+                        reward += early_bonus
+
                     # 更新跟踪变量
                     env._update_tracking_variables(
                         response=response,
