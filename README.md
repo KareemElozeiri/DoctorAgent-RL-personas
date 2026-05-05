@@ -15,11 +15,13 @@
 - [Key Features](#key-features)
 - [Methodology](#methodology)
 - [Experiments](#experiments)
+- [Extended Experiments](#extended-experiments)
 - [Setup](#setup)
 - [Experiment Scripts](#experiment-scripts)
 - [Citation](#citation)
 
 ## News
+* **[2026.05.05]** Extended experiments: **Patient Persona Robustness** evaluation across education levels and **Early Termination Bonus (ETB)** reward for diagnostic efficiency.
 * **[2026.01.16]** Our conference paper **DoctorAgent-RL: A Multi-Agent Collaborative Reinforcement Learning System for Multi-Turn Clinical Dialogue** ([preliminary version](https://github.com/JarvisUSTC/DoctorAgent-RL/blob/main/DoctorAgent-RL_ICASSP2026.pdf.zip)) has been accepted by **ICASSP 2026**! We have also submitted a significantly extended version of this work to a journal.
 * **[2025.10.15]** We've released a significant update to our paper, now available on [arXiv](https://arxiv.org/pdf/2505.19630)! This new version includes more practical and rigorous experiments, showcasing the real-world capabilities of our DoctorAgent-RL model. We've conducted a thorough evaluation of the model on real patient diagnoses and validated its performance with expert feedback.
 * **[2025.6.16]** We released the source code in [GitHub](https://github.com/JarvisUSTC/DoctorAgent-RL) and Models in [Huggingface](https://huggingface.co/collections/Jarvis1111/doctoragent-rl-684ffbcade52305ba0e3e97f)!
@@ -98,6 +100,38 @@ We also investigated the framework's adaptability under varying turn budgets, hi
 
 ---
 
+## Extended Experiments
+
+This repository extends the original DoctorAgent-RL with two additional experiments.
+
+### Patient Persona Robustness
+
+We evaluate the doctor agent's robustness when the patient agent is conditioned on different education-level personas. The patient agent is given a persona description at the start of each dialogue, simulating patients with varying health literacy.
+
+| Persona | Description |
+|---|---|
+| No Persona | Baseline — no persona conditioning |
+| Illiterate | Patient with no formal education |
+| Elementary | Patient with elementary school education |
+| High School | Patient with high school education |
+| Graduate | Patient with graduate-level education |
+
+Evaluation results (diagnostic performance, efficiency, and information retrieval) per persona are in `outputs/persona_experiments/`.
+
+### Early Termination Bonus (ETB)
+
+We augment the RL reward with a bonus that encourages the doctor agent to reach a correct diagnosis *before* exhausting the turn budget:
+
+```
+ETB = (turns_remaining / max_turns) × diagnosis_score × 5
+```
+
+This reward is added on top of the standard diagnosis and recommendation scores. The ETB metric is tracked per case and reported in the evaluation summary alongside `combined_score`, `dei`, `avg_turns`, and `avg_tokens`.
+
+Persona experiments under the ETB reward are in `outputs/persona_experiments_etb/`.
+
+---
+
 ## Setup
 
 To set up your environment and run DoctorAgent-RL, follow these steps:
@@ -158,7 +192,29 @@ bash ragen/env/medical_consultation/evaluation/run_eval_patientllm_category.sh $
 bash ragen/env/medical_consultation/evaluation/run_eval_patientllm_category_api.sh ${MODEL_NAME}
 ```
 
-For more detailed command-line arguments and configuration options, please refer to the individual script files that will be released with the code.
+### 4. Run Persona Experiments
+
+```bash
+# Inference across all 5 persona conditions
+bash persona_infer.sh <model_path>
+
+# Evaluate and print summary table (combined_score, dei, avg_turns, ...)
+bash persona_eval.sh
+```
+
+Results are written to `outputs/persona_experiments/`.
+
+### 5. Run Persona Experiments with Early Termination Bonus
+
+```bash
+# Step 1: Inference with the ETB-trained model
+bash persona_infer_early_term.sh <model_path>
+
+# Step 2: Evaluate and print ETB summary table
+bash persona_eval_early_term.sh
+```
+
+Results are written to `outputs/persona_experiments_etb/`. The summary table includes an `etb` column in addition to the standard metrics.
 
 ## Citation
 
