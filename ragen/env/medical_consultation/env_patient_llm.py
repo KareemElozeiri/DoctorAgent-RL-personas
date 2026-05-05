@@ -406,7 +406,13 @@ Your self-report states: {self.description}
                             reward += similarity * 5  # 建议奖励
                             env.recommandation_score = similarity
                             assert similarity >= 0
-                    
+
+                    # Early termination bonus: reward diagnosing before max turns, scaled by diagnosis quality
+                    turns_remaining = env.max_turns - env.current_turn
+                    if turns_remaining > 0 and env.diagnosis_score is not None:
+                        early_bonus = (turns_remaining / env.max_turns) * env.diagnosis_score * 5
+                        reward += early_bonus
+
                     # 更新跟踪变量
                     env._update_tracking_variables(
                         response=response,
